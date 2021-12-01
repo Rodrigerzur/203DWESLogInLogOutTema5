@@ -9,10 +9,15 @@
  */
 
 USE DB203DWESProyectoTema4;
--- Insertar datos en la tabla Departamento de la base de datos DAW207DBDepartamentos
-INSERT INTO Departamento (CodDepartamento, DescDepartamento, FechaBaja, VolumenNegocio) VALUES
-('INF','Departamento de Informatica',null,1.5),
-('BIO','Departamento de Biologia',null,2.5),
-('ING','Departamento de Inglés',null,3.5),
-('LEN','Departamento de Lengua',null,4.5),
-('MUS','Departamento de Musica',null,1.5);
+-- Insertar datos en la tabla Departamento de la base de datos DAW203DBDepartamentos
+INSERT INTO T02_Departamento(T02_CodDepartamento,T02_DescDepartamento,T02_FechaCreacionDepartamento,T02_VolumenNegocio) VALUES 
+('FOL', 'departamento FOL', 1406149672, 102.4),
+('DAW', 'departamento DAW', 1406149672, 1000.3),
+('DIW', 'departamento DIW', 1406149672, 289.3);
+
+/*insert datos en la tabla usuarios*/
+
+INSERT INTO T01_Usuario(T01_CodUsuario,T01_Password,T01_DescUsuario)  VALUES 
+('outmane', sha2('outmanepaso',256), "Desc1"),
+('heraclio', sha2('heracliopaso',256), "Desc2"),
+('rodrigo', sha2('rodrigopaso',256), "Desc3");
