@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS T01_Usuario (
     T01_CodUsuario VARCHAR(8) PRIMARY KEY,
     T01_Password VARCHAR(255) NOT NULL,
     T01_DescUsuario VARCHAR(255) NOT NULL,
-    T01_NumConexiones INT DEFAULT 0,
-    T01_FechaHoraUltimaConexion INT,
+    T01_NumConexiones INT DEFAULT 0 NOT NULL,
+    T01_FechaHoraUltimaConexionAnterior DATETIME NULL ,
     T01_Perfil enum('administrador', 'usuario') DEFAULT 'usuario', 
     T01_ImagenUsuario mediumblob
 ) ENGINE=INNODB;

@@ -61,11 +61,14 @@ try {
                 <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="formularioAlta">
                     <h3 style="text-align: center;">Bienvenido</h3>
                     <br>
-                    <div class="mensajebienvenida">Has iniciado sesion como <span class="user"><?php echo $_SESSION['usuarioDAW203LogInLogOut'] ?></span>, esta es la <?php echo $oResultado->T01_NumConexiones ?>ª vez que te conectas<?php
-                if (!is_null($_SESSION['FechaHoraUltimaConexion'])) {
-                    ?> La ultima conexion se realizo en  <?php
-                    echo $_SESSION['FechaHoraUltimaConexion'];
-                }
+                    <div class="mensajebienvenida">Has iniciado sesion como <span class="user"><?php echo $_SESSION['usuarioDAW203LogInLogOut'] ?></span>, esta es la <?php echo $oResultado->T01_NumConexiones ?>ª vez que te conectas.<?php
+                if (!is_null($_SESSION['FechaHoraUltimaConexionAnterior'])) {
+                    ?> <?php if(($oResultado->T01_NumConexiones) >1){echo'</br>La ultima conexion se realizo en ' ;}?>  
+                        <?php
+                    echo $_SESSION['FechaHoraUltimaConexionAnterior'];
+                }else{
+                        echo '</br>Se acaba de realizar la conexion a  ';echo ($oFechaHoraActual = new DateTime)->format('d-m-Y H:i:s');
+                    }
                 ?>.</div>
                     <div>
                         <input type="submit" value="Detalles" style="background-color: rgba(17, 188, 20, 0.8)" name="Detalles" class="Aceptar">

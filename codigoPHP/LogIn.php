@@ -1,5 +1,5 @@
 <?php
-if (isset($_REQUEST['Cancelar'])) {
+if (isset($_REQUEST['Volver'])) {
     header('Location:' . '../../../../203DWESProyectoTema5/indexProyectoTema5.php'); //Link al indexProyectoTema5
     exit;
 }
@@ -21,7 +21,7 @@ $aFormulario = [
 /**
  * Si se ha enviado el formulario.
  */
-if (isset($_REQUEST['Aceptar'])) {
+if (isset($_REQUEST['IniciarSesion'])) {
     $bEntradaOK = true;
 
 //si el usuario o la contraseña no estan bien introducidos
@@ -31,27 +31,24 @@ if (isset($_REQUEST['Aceptar'])) {
 
 //si no encuentra ningun error pasa a hacer la validacion de campos
     if ($bEntradaOK) {
-        /* Recogida de información */
         $aFormulario['usuario'] = $_REQUEST['CodUsuario'];
         $aFormulario['password'] = $_REQUEST['Password'];
-
         try {
- /* Establecemos la connection con pdo */
-        $miDB = new PDO(HOST, USER, PASSWORD);
-        /* configurar las excepcion */
-        $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            /* Establecemos la connection con pdo */
+            $miDB = new PDO(HOST, USER, PASSWORD);
+            /* configurar las excepciones */
+            $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Query de selección.
             $sSelect = <<<QUERY
-                SELECT T01_FechaHoraUltimaConexion FROM T01_Usuario
+                SELECT *  FROM T01_Usuario
                 WHERE T01_CodUsuario='{$aFormulario['usuario']}' AND
                 T01_Password=SHA2("{$aFormulario['usuario']}{$aFormulario['password']}", 256);
-            QUERY;
+QUERY;
 
 // Preparación y ejecución de la consulta.
             $oResultadoSelect = $miDB->prepare($sSelect);
             $oResultadoSelect->execute();
-
             $oResultado = $oResultadoSelect->fetchObject();
         } catch (PDOException $exception) {
 //recarga el login si ocurre alguna excepcion
@@ -89,23 +86,23 @@ if ($bEntradaOK) {
 //Actualizacion en la BD.
         $sUpdate = <<<QUERY
             UPDATE T01_Usuario SET T01_NumConexiones=T01_NumConexiones+1,
-            T01_FechaHoraUltimaConexion = '{$oDateTime->format("y-m-d h:i:s")}'
+            T01_FechaHoraUltimaConexionAnterior = '{$oDateTime->format("y-m-d h:i:s")}'
             WHERE T01_CodUsuario='{$aFormulario['usuario']}';
-        QUERY;
+QUERY;
 
         $oUpdateBD = $miDB->prepare($sUpdate);
         $oUpdateBD->execute();
     } catch (PDOException $exception) {
 //otra vez se recargara la pagina si sucede alguna excepcion
-      // header('Location: LogIn.php');
-      // exit;
+        header('Location: LogIn.php');
+        exit;
     } finally {
         unset($miDB);
     }
 
 // Variables de sesión para el usuario.
     $_SESSION['usuarioDAW203LogInLogOut'] = $aFormulario['usuario'];
-    $_SESSION['FechaHoraUltimaConexion'] = $oResultado->T01_FechaHoraUltimaConexion;
+    $_SESSION['FechaHoraUltimaConexionAnterior'] = $oResultado->T01_FechaHoraUltimaConexionAnterior;
 
 // una vez finalizado el login se envia al usuario a la pagina del programa
     header('Location: programa.php');
@@ -138,8 +135,8 @@ if ($bEntradaOK) {
                         <br><br>
                     </div>
                     <div>
-                        <input type="submit" value="Aceptar" style="background-color: rgba(17, 188, 20, 0.8)" name="Aceptar" class="Aceptar">
-                        <input type="submit" value="Cancelar" style="background-color: rgba(207, 16, 16, 0.8)" name="Cancelar" class="Aceptar">
+                        <input type="submit" value="Iniciar Sesion" style="background-color: rgba(17, 188, 20, 0.8)" name="IniciarSesion" class="Aceptar">
+                        <input type="submit" value="Volver" style="background-color: rgba(207, 16, 16, 0.8)" name="Volver" class="Aceptar">
                     </div>
                 </form>
             </div>
