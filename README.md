@@ -9,4 +9,4 @@ Ejercicios para iniciar sesión y cerrarla, así como conservarla.
 * SQL
 
 ## URL del proyecto
-https://daw203.ieslossauces.es/203DWESProyectoTema5/indexProyectoTema5.php
+https://daw203.ieslossauces.es/203DWESLogInLogOutTema5/codigoPHP/LogIn.php
