@@ -1,4 +1,5 @@
 <?php
+
 require_once '../config/confDBPDO.php'; //Archivo con configuracion de PDO
 try {
 
@@ -6,8 +7,8 @@ try {
     $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = <<<EOD
-DROP DATABASE dbs4868791;
-DROP USER dbu2267458;
+DROP TABLE IF EXISTS T01_Usuario;
+DROP TABLE IF EXISTS T02_Departamento;
 EOD;
 
     $miDB->exec($sql);

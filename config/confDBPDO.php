@@ -14,7 +14,7 @@ define("PASSWORD", "P@ssw0rd");
 define("USER", "User203DWESProyectoTema4");
 */
 define("HOST","mysql:host=db5005797349.hosting-data.io;dbname=dbs4868791");
-   define("PASSWORD", "paso");
+   define("PASSWORD", "daw2_Sauces");
    define("USER","dbu2267458");
 
 
