@@ -9,6 +9,11 @@ if (!isset($_COOKIE['idioma'])) {
     exit;
 }
 
+if (isset($_REQUEST['registrarse'])) {
+    header('Location: registro.php'); //Link al indexProyectoTema5
+    exit;
+}
+
 if (isset($_REQUEST['idiomaElegido'])) {
     setcookie("idioma", $_REQUEST['idiomaElegido'], time() + 2592000); //Ponemos que el idioma sea español
     header('Location: LogIn.php');
@@ -21,14 +26,18 @@ $aIdiomas = array(
         'usuario' => 'Usuario',
         'pass' => 'Contraseña',
         'iniciar'=>'Iniciar Sesion',
-        'volver'=>'Volver'
+        'volver'=>'Volver',
+        'registrarse'=>'Registrarme',
+        'registrarse2'=>'¿No tienes cuenta?'
     ),
     'en' => array(
         'bienvenido' => 'Welcome',
         'usuario' => 'User',
         'pass' => 'Password',
         'iniciar' => 'Log In',
-        'volver'=>'Close'
+        'volver'=>'Close',
+        'registrarse'=>'Sign In',
+        'registrarse2'=>'New to this app?'
     )
 );
 
@@ -169,6 +178,10 @@ QUERY;
                     <div>
                         <input type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['iniciar']; ?>" style="background-color: rgba(17, 188, 20, 0.8)" name="IniciarSesion" class="Aceptar">
                         <input type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['volver']; ?>" style="background-color: rgba(207, 16, 16, 0.8)" name="Volver" class="Aceptar">
+                        <br><br>
+                        <label style="font-weight: bold;" class="CodigoDepartamento" for="registrarse"><?php echo $aIdiomas[$_COOKIE['idioma']]['registrarse2']; ?></label>
+                        <br>
+                        <input type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['registrarse']; ?>" name="registrarse" style="background-color: rgba(0, 215, 230, 0.78);" class="Aceptar">
                     </div>
                 </form>
             </div>

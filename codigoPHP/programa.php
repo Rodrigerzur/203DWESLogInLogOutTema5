@@ -9,8 +9,13 @@ if (!isset($_COOKIE['idioma'])) {
     exit;
 }
 
+if (isset($_REQUEST['editarPerfil'])) {
+    header('Location: editarPerfil.php');
+    exit;
+}
+
 if (isset($_REQUEST['idiomaSeleccionado'])) {
-    setcookie("idioma", $_REQUEST['idiomaSeleccionado'], time() + 2592000); //Ponemos que el idioma sea español
+    setcookie("idioma", $_REQUEST['idiomaSeleccionado'], time() + 2592000); 
     header('Location: LogIn.php');
     exit;
 }
@@ -28,7 +33,8 @@ $aIdiomas = array(
         '1mensaje'=>'Has iniciado sesion como '.$_SESSION['usuarioDAW203LogInLogOut'],
         '2mensaje'=>'Esta es tu conexion nº ',
         '3mensaje'=>'La ultima conexion se realizo en ',
-        '4mensaje'=>'Fecha-Hora de la primera conexion:   '
+        '4mensaje'=>'Fecha-Hora de la primera conexion:   ',
+        'editarPerfil'=>'Editar Perfil'
     ),
     'en' => array(
         'bienvenido' => 'Welcome',
@@ -42,7 +48,8 @@ $aIdiomas = array(
         '1mensaje'=>'You are logged in as '.$_SESSION['usuarioDAW203LogInLogOut'],
         '2mensaje'=>'This is your log in nº ',
         '3mensaje'=>'Last connection was made on ',
-        '4mensaje'=>'First connection was made on   '
+        '4mensaje'=>'First connection was made on   ',
+        'editarPerfil'=>'Edit Profile'
     )
 );
 // Si se selecciona cerrar sesión, se cierra y destruye, y vuelve a la página de login.
@@ -118,6 +125,8 @@ try {
                 </div>
            
                     <div>
+                        <input type="submit" style="background-color: rgba(242, 231, 87, 0.78);" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['editarPerfil']; ?>" name="editarPerfil" class="Aceptar">
+                        </br></br>
                         <input type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['detalles']; ?>" style="background-color: rgba(17, 188, 20, 0.8)" name="Detalles" class="Aceptar">
                         <input type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['logout']; ?>" style="background-color: rgba(207, 16, 16, 0.8)" name="LogOut" class="Aceptar">
                     </div>
