@@ -35,8 +35,8 @@ $aIdiomas['es'] = ['bienvenido' => 'Bienvenido',
     'Aceptar' => 'Aceptar',
     'Cancelar' => 'Cancelar',
     'editarPerfil' => 'Editar Perfil',
-    '3mensaje'=>'La ultima conexion se realizo en ',
-        '4mensaje'=>'Fecha-Hora de la primera conexion:   '];
+    '3mensaje' => 'La ultima conexion se realizo en ',
+    '4mensaje' => 'Fecha-Hora de la primera conexion:   '];
 
 $aIdiomas['en'] = ['bienvenido' => 'Welcome',
     'usuario' => 'User: ',
@@ -51,8 +51,8 @@ $aIdiomas['en'] = ['bienvenido' => 'Welcome',
     'Aceptar' => 'Acept',
     'Cancelar' => 'Cancel',
     'editarPerfil' => 'Edit Profile',
-    '3mensaje'=>'Last connection was made on ',
-        '4mensaje'=>'First connection was made on   '
+    '3mensaje' => 'Last connection was made on ',
+    '4mensaje' => 'First connection was made on   '
 ];
 
 require_once '../core/210322ValidacionFormularios.php';
@@ -191,16 +191,19 @@ if ($entradaOK) {
                             <input type="text" style="background-color: transparent; border: 0px;" id="NConexiones" name="NConexiones" value="<?php echo $numConexiones; ?>" readonly>
 
                             <br><br>
-                           <?php
-                if (!is_null($_SESSION['FechaHoraUltimaConexionAnterior'])) {
-                    ?> <?php if(($oResultado->T01_NumConexiones) >1){
-                        echo $aIdiomas[$_COOKIE['idioma']]['3mensaje'] ;}?>  
-                        <?php
-                    echo $_SESSION['FechaHoraUltimaConexionAnterior'];
-                }else{
-                        echo $aIdiomas[$_COOKIE['idioma']]['4mensaje'];echo ($oFechaHoraActual = new DateTime)->format('d-m-Y H:i:s');
-                    }
-                ?>.
+                            <?php
+                            if (!is_null($_SESSION['FechaHoraUltimaConexion'])) {
+                                ?> <?php if (($oResultado->T01_NumConexiones) > 1) {
+                            echo $aIdiomas[$_COOKIE['idioma']]['3mensaje'];
+                        }
+                                ?>  
+                                <?php
+                                echo $_SESSION['FechaHoraUltimaConexion'];
+                            } else {
+                                echo $aIdiomas[$_COOKIE['idioma']]['4mensaje'];
+                                echo ($oFechaHoraActual = new DateTime)->format('d-m-Y H:i:s');
+                            }
+                            ?>.
 
                             <br><br>
                             <input type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['cambiarPassword']; ?>" name="CambiarPass" style="background-color: rgba(0, 215, 230, 0.78);" class="Aceptar">
@@ -215,6 +218,9 @@ if ($entradaOK) {
                     </form>
                 </div>
             </main>
+            <footer>
+                <div><a href="https://daw203.ieslossauces.es/index.php">Rodrigo Geras Zurrón</a></div><div><a href="https://github.com/Rodrigerzur/203DWESLogInLogOutTema5">Github</a></div>
+            </footer>
         </body>
     </html>
     <?php

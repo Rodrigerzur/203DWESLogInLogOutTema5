@@ -20,19 +20,19 @@ $aIdiomas = array(
         'bienvenido' => 'Bienvenido',
         'usuario' => 'Usuario',
         'pass' => 'Contraseña',
-        'iniciar'=>'Iniciar Sesion',
-        'volver'=>'Volver',
-        'programa'=>'Programa',
-        'detalles'=>'Detalles'
+        'iniciar' => 'Iniciar Sesion',
+        'volver' => 'Volver',
+        'programa' => 'Programa',
+        'detalles' => 'Detalles'
     ),
     'en' => array(
         'bienvenido' => 'Welcome',
         'usuario' => 'User',
         'pass' => 'Password',
         'iniciar' => 'Log In',
-        'volver'=>'Close',
-        'programa'=>'Program',
-        'detalles'=>'Summary'
+        'volver' => 'Close',
+        'programa' => 'Program',
+        'detalles' => 'Summary'
     )
 );
 ?>
@@ -51,40 +51,43 @@ $aIdiomas = array(
         </header>
         <main>
             <div class="mainDetalles">
-            <h2>$_SESSION</h2>
-            <table>
-                <?php
-                foreach ($_SESSION as $key => $value) {
-                    echo '<tr>';
-                    echo "<td>$key:  </td>";
-                    echo "<td> $value</td>";
-                    echo '</tr>';
-                }
-                ?>
-            </table>
-            <h2>$_COOKIE</h2>
-            <table>
-                <?php
-                foreach ($_COOKIE as $key => $value) {
-                    echo '<tr>';
-                    echo "<td>$key:</td>";
-                    echo "<td> $value</td>";
-                    echo '</tr>';
-                }
-                ?>
-            </table>
-            <h2>$_SERVER</h2>
-            <table>
-                <?php
-                foreach ($_SERVER as $key => $value) {
-                    echo '<tr>';
-                    echo "<td>$key:</td>";
-                    echo "<td> $value</td>";
-                    echo '</tr>';
-                }
-                ?>
-            </table>  
+                <h2>$_SESSION</h2>
+                <table>
+                    <?php
+                    foreach ($_SESSION as $key => $value) {
+                        echo '<tr>';
+                        echo "<td>$key:  </td>";
+                        echo "<td> $value</td>";
+                        echo '</tr>';
+                    }
+                    ?>
+                </table>
+                <h2>$_COOKIE</h2>
+                <table>
+                    <?php
+                    foreach ($_COOKIE as $key => $value) {
+                        echo '<tr>';
+                        echo "<td>$key:</td>";
+                        echo "<td> $value</td>";
+                        echo '</tr>';
+                    }
+                    ?>
+                </table>
+                <h2>$_SERVER</h2>
+                <table>
+                    <?php
+                    foreach ($_SERVER as $key => $value) {
+                        echo '<tr>';
+                        echo "<td>$key:</td>";
+                        echo "<td> $value</td>";
+                        echo '</tr>';
+                    }
+                    ?>
+                </table>  
             </div>
         </main>
+        <footer>
+            <div><a href="https://daw203.ieslossauces.es/index.php">Rodrigo Geras Zurrón</a></div><div><a href="https://github.com/Rodrigerzur/203DWESLogInLogOutTema5">Github</a></div>
+        </footer>
     </body>
 </html>
