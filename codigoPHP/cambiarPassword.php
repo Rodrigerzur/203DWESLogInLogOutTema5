@@ -43,7 +43,7 @@ if (isset($_REQUEST['Aceptar'])) { //Comprobamos que el usuario haya enviado el 
     $aErrores['NewPassword'] = validacionFormularios::validarPassword($_REQUEST['NewPassword'], 8, 3, 1, OBLIGATORIO);
     $aErrores['RepetirPassword'] = validacionFormularios::validarPassword($_REQUEST['RepetirPassword'], 8, 3, 1, OBLIGATORIO);
     try {
-       /* Establecemos la connection con pdo */
+        /* Establecemos la connection con pdo */
         $miDB = new PDO(HOST, USER, PASSWORD);
         /* configurar las excepcion */
         $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -52,7 +52,7 @@ if (isset($_REQUEST['Aceptar'])) { //Comprobamos que el usuario haya enviado el 
         $consultaUsuario = $miDB->prepare($sqlUsuario); //Preparamos la consulta
         $parametrosUsuario = [":CodUsuario" => $_SESSION['usuarioDAW203LogInLogOut']];
 
-        $consultaUsuario->execute($parametrosUsuario); 
+        $consultaUsuario->execute($parametrosUsuario);
         $registro = $consultaUsuario->fetchObject();
         $passwordUsuario = $registro->T01_Password;
         $passwordEncriptada = hash("sha256", ($_SESSION['usuarioDAW203LogInLogOut'] . $_REQUEST['PasswordA']));
@@ -64,26 +64,26 @@ if (isset($_REQUEST['Aceptar'])) { //Comprobamos que el usuario haya enviado el 
             $aErrores['RepetirPassword'] = "Error, las contraseñas no coinciden";
         }
     } catch (PDOException $excepcion) {
-        $errorExcepcion = $excepcion->getCode(); 
-        $mensajeExcepcion = $excepcion->getMessage(); 
+        $errorExcepcion = $excepcion->getCode();
+        $mensajeExcepcion = $excepcion->getMessage();
 
         echo "<span style='color: red;'>Error: </span>" . $mensajeExcepcion . "<br>";
         echo "<span style='color: red;'>Código del error: </span>" . $errorExcepcion;
     } finally {
-        unset($miDB); 
+        unset($miDB);
     }
 
     // Recorremos el array de errores
     foreach ($aErrores as $campo => $error) {
         if ($error != null) { // Comprobamos que el campo no esté vacio
-            $entradaOK = false; 
+            $entradaOK = false;
             $_REQUEST[$campo] = ""; //Limpiamos los campos del formulario
         }
     }
 } else {
-    $entradaOK = false; 
+    $entradaOK = false;
 }
-if ($entradaOK) { 
+if ($entradaOK) {
     try {
         /* Establecemos la connection con pdo */
         $miDB = new PDO(HOST, USER, PASSWORD);
@@ -100,24 +100,24 @@ if ($entradaOK) {
         header('Location: editarPerfil.php');
         exit;
     } catch (PDOException $excepcion) {
-        $errorExcepcion = $excepcion->getCode(); 
-        $mensajeExcepcion = $excepcion->getMessage(); 
+        $errorExcepcion = $excepcion->getCode();
+        $mensajeExcepcion = $excepcion->getMessage();
 
-        echo "<span style='color: red;'>Error: </span>" . $mensajeExcepcion . "<br>"; 
-        echo "<span style='color: red;'>Código del error: </span>" . $errorExcepcion; 
+        echo "<span style='color: red;'>Error: </span>" . $mensajeExcepcion . "<br>";
+        echo "<span style='color: red;'>Código del error: </span>" . $errorExcepcion;
     } finally {
-        unset($miDB); 
+        unset($miDB);
     }
 } else {//Si el usuario no ha rellenado el formulario correctamente volvera a rellenarlo
     ?>
     <!DOCTYPE html>
     <html lang="es">
         <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cambiar contraseña</title>
-        <link href="../webroot/css/style.css" rel="stylesheet"> 
-    </head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Cambiar contraseña</title>
+            <link href="../webroot/css/style.css" rel="stylesheet"> 
+        </head>
         <body>
             <header>
                 <div class="titulo"><?php echo $aIdiomas[$_COOKIE['idioma']]['Aceptar']; ?></div>
@@ -130,28 +130,28 @@ if ($entradaOK) {
                         <div>
                             <label style="font-weight: bold;" class="CodigoDepartamento" for="PasswordA"><?php echo $aIdiomas[$_COOKIE['idioma']]['password']; ?></label>
                             <input type="password" style="background-color: #D2D2D2" id="PasswordA" name="PasswordA" value="<?php echo(isset($_REQUEST['PasswordA']) ? $_REQUEST['PasswordA'] : null); ?>">
-    <?php
-    if ($aErrores['PasswordA'] != null) { 
-        echo "<span style='color: red;'>" . $aErrores['PasswordA'] . "</span>";
-    }
-    ?>
+                            <?php
+                            if ($aErrores['PasswordA'] != null) {
+                                echo "<span style='color: red;'>" . $aErrores['PasswordA'] . "</span>";
+                            }
+                            ?>
                             <br><br>
                             <label style="font-weight: bold;" class="CodigoDepartamento" for="NewPassword"><?php echo $aIdiomas[$_COOKIE['idioma']]['NewPassword']; ?></label>
                             <input type="password" style="background-color: #D2D2D2" id="NewPassword" name="NewPassword" value="<?php echo(isset($_REQUEST['NewPassword']) ? $_REQUEST['NewPassword'] : null); ?>">
-    <?php
-    if ($aErrores['NewPassword'] != null) { 
-        echo "<span style='color: red;'>" . $aErrores['NewPassword'] . "</span>";
-    }
-    ?>
+                            <?php
+                            if ($aErrores['NewPassword'] != null) {
+                                echo "<span style='color: red;'>" . $aErrores['NewPassword'] . "</span>";
+                            }
+                            ?>
                             <br><br>
 
                             <label style="font-weight: bold;" class="DescripcionDepartamento" for="RepetirPassword"><?php echo $aIdiomas[$_COOKIE['idioma']]['RepetirPassword']; ?></label>
                             <input type="password" style="background-color: #D2D2D2" id="RepetirPassword" name="RepetirPassword" value="<?php echo(isset($_REQUEST['RepetirPassword']) ? $_REQUEST['RepetirPassword'] : null); ?>">
-    <?php
-    if ($aErrores['RepetirPassword'] != null) { 
-        echo "<span style='color: red;'>" . $aErrores['RepetirPassword'] . "</span>";
-    }
-    ?>
+                            <?php
+                            if ($aErrores['RepetirPassword'] != null) {
+                                echo "<span style='color: red;'>" . $aErrores['RepetirPassword'] . "</span>";
+                            }
+                            ?>
                             <br><br>
                         </div>
                         <div>
@@ -161,6 +161,9 @@ if ($entradaOK) {
                     </form>
                 </div>
             </main>
+            <footer>
+                <div><a href="https://daw203.ieslossauces.es/index.php">Rodrigo Geras Zurrón</a></div><div><a href="https://github.com/Rodrigerzur/203DWESLogInLogOutTema5">Github</a></div>
+            </footer>
         </body>
     </html>
     <?php

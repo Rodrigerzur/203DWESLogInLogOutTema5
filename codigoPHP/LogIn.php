@@ -123,7 +123,7 @@ if ($bEntradaOK) {
 //Actualizacion en la BD.
         $sUpdate = <<<QUERY
             UPDATE T01_Usuario SET T01_NumConexiones=T01_NumConexiones+1,
-            T01_FechaHoraUltimaConexionAnterior = '{$oDateTime->format("y-m-d h:i:s")}'
+            T01_FechaHoraUltimaConexion = '{$oDateTime->format("y-m-d h:i:s")}'
             WHERE T01_CodUsuario='{$aFormulario['usuario']}';
 QUERY;
 
@@ -139,7 +139,7 @@ QUERY;
 
 // Variables de sesión para el usuario.
     $_SESSION['usuarioDAW203LogInLogOut'] = $aFormulario['usuario'];
-    $_SESSION['FechaHoraUltimaConexionAnterior'] = $oResultado->T01_FechaHoraUltimaConexionAnterior;
+    $_SESSION['FechaHoraUltimaConexion'] = $oResultado->T01_FechaHoraUltimaConexion;
 
 // una vez finalizado el login se envia al usuario a la pagina del programa
     header('Location: programa.php');
@@ -186,5 +186,8 @@ QUERY;
                 </form>
             </div>
         </main>
+        <footer>
+            <div><a href="https://daw203.ieslossauces.es/index.php">Rodrigo Geras Zurrón</a></div><div><a href="https://github.com/Rodrigerzur/203DWESLogInLogOutTema5">Github</a></div>
+        </footer>
     </body>
 </html>

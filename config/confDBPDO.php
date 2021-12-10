@@ -8,8 +8,8 @@
 
 
 
-define("HOST", "mysql:host=192.168.1.101;dbname=DB203DWESProyectoTema4");
-//define("HOST","mysql:host=daw203.sauces.local;dbname=DB203DWESProyectoTema4");
+//define("HOST", "mysql:host=192.168.1.101;dbname=DB203DWESProyectoTema4");
+define("HOST","mysql:host=daw203.sauces.local;dbname=DB203DWESProyectoTema4");
 define("PASSWORD", "P@ssw0rd");
 define("USER", "User203DWESProyectoTema4");
 /*
